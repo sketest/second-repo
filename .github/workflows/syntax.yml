@@ -2,8 +2,8 @@ on:
   pull_request:
     paths:
       - '.github/workflows/**'
-#       - '.github/CODEOWNERS'
-#       - 'package*.json'
+      - '.github/CODEOWNERS'
+      - 'package*.json'
 
 jobs:
   triage:
@@ -20,4 +20,4 @@ jobs:
           PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
           gh issue edit $PR_NUMBER --add-label "invalid" --repo ske-test-org/second-repo
-          gh issue comment $PR_NUMBER "It looks like you edited `package*.json`, `.github/CODEOWNERS`, or `.github/workflows/**'`. We don't allow contributions to these files. Please review our [contributing guidelines](https://github.com/octo-org/octo-repo/blob/main/CONTRIBUTING.md) for what contributions are accepted." --repo ske-test-org/second-repo
+          gh issue comment $PR_NUMBER 'It looks like you edited \`package*.json\`, \`.github/CODEOWNERS\`, or \`.github/workflows/**\`. We do not allow contributions to these files. Please review our [contributing guidelines](https://github.com/octo-org/octo-repo/blob/main/CONTRIBUTING.md) for what contributions are accepted.' --repo ske-test-org/second-repo
