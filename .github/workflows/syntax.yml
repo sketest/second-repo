@@ -2,8 +2,8 @@ on:
   pull_request:
     paths:
       - '.github/workflows/**'
-      - '.github/CODEOWNERS'
-      - 'package*.json'
+#       - '.github/CODEOWNERS'
+#       - 'package*.json'
 
 jobs:
   triage:
