@@ -11,4 +11,25 @@ jobs:
     steps:
       - env:
           MESSAGE: ${{ github.event.message }}
-        run: echo "$MESSAGE"
+        run: echo $MESSAGE
+  run_if_success:
+    if: ${{ github.event.passed }}
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          MESSAGE: ${{ github.event.message }}
+        run: echo $MESSAGE
+  run_if_failure2:
+    if: ${{ !github.event.passed }}
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          MESSAGE: ${{ github.event.message }}
+        run: echo '$MESSAGE'
+  run_if_success2:
+    if: ${{ github.event.passed }}
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          MESSAGE: ${{ github.event.message }}
+        run: echo '$MESSAGE'
