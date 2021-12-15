@@ -1,13 +1,19 @@
 on:
-  workflow_run:
-    workflows: ["Run Tests"]
-    types:
-      - completed
+  push:
+
+# jobs:
+#   a:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Run a one-line script
+#         run: echo hi
 
 jobs:
-  a:
+  print_context:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Run a one-line script
-        run: echo hi
+      - env:
+          EVENT_CONTEXT: ${{ toJSON(github.event) }}
+        run: |
+          echo $EVENT_CONTEXT
