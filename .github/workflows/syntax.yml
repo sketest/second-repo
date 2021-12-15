@@ -1,19 +1,11 @@
 on:
-  push:
-
-# jobs:
-#   a:
-#     runs-on: ubuntu-latest
-
-#     steps:
-#       - name: Run a one-line script
-#         run: echo hi
+  issues:
+    types:
+      - labeled
 
 jobs:
-  print_context:
+  run_if_label_matches:
+    if: github.event.label.name == 'bug'
     runs-on: ubuntu-latest
     steps:
-      - env:
-          EVENT_CONTEXT: ${{ toJSON(github.event) }}
-        run: |
-          echo $EVENT_CONTEXT
+      - run: echo 'The label was bug'
