@@ -1,20 +1,23 @@
-on: issue_comment
+on:
+  pull_request_target:
+    paths:
+      - '.github/workflows/**'
+      - '.github/CODEOWNERS'
+      - 'package*.json'
 
 jobs:
-  pr_commented:
-    # This job only runs for pull request comments
-    name: PR comment
-    if: ${{ github.event.issue.pull_request }}
+  triage:
+    if: >-
+      ${{
+        github.event.pull_request.user.login != 'octobot' &&
+        github.event.pull_request.user.login != 'dependabot[bot]'
+      }}
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          echo "Comment on PR #${{ github.event.issue.number }}"
-
-  issue_commented:
-    # This job only runs for issue comments
-    name: Issue comment
-    if: ${{ !github.event.issue.pull_request }}
-    runs-on: ubuntu-latest
-    steps:
-      - run: |
-          echo "Comment on issue #${{ github.event.issue.number }}"
+      - name: "Comment about changes we can't accept"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          gh issue edit $PR_NUMBER --add-label "invalid"
+          gh issue comment $PR_NUMBER "It looks like you edited `package*.json`, `.github/CODEOWNERS`, or `.github/workflows/**'`. We don't allow contributions to these files. Please review our [contributing guidelines](https://github.com/octo-org/octo-repo/blob/main/CONTRIBUTING.md) for what contributions are accepted."
