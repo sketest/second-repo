@@ -1,0 +1,14 @@
+name: Repo dispatch
+
+on:
+  repository_dispatch:
+    types: [test_result]
+
+jobs:
+  run_if_failure:
+    if: ${{ !github.event.passed }}
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          MESSAGE: ${{ github.event.message }}
+        run: echo "$MESSAGE"
