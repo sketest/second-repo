@@ -17,7 +17,7 @@ jobs:
       - name: "Comment about changes we can't accept"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR: ${{ github.event.pull_request.html_url }}
         run: |
-          gh issue edit $PR_NUMBER --add-label "invalid" --repo "ske-test-org/second-repo"
-          gh issue comment $PR_NUMBER --body 'It looks like you edited \`package*.json\`, \`.github/CODEOWNERS\`, or \`.github/workflows/**\`. We do not allow contributions to these files. Please review our [contributing guidelines](https://github.com/octo-org/octo-repo/blob/main/CONTRIBUTING.md) for what contributions are accepted.' --repo "ske-test-org/second-repo"
+          gh issue edit $PR --add-label "invalid"
+          gh issue comment $PR --body "nope"
