@@ -6,8 +6,8 @@ jobs:
     runs-on: ubuntu-latest
 #     if: >-
 #       ${{
-#         github.event.status.state == 'error' ||
-#         github.event.status.state == 'success'
+#         github.event.state == 'error' ||
+#         github.event.state == 'success'
 #       }}
     steps:
       - env:
