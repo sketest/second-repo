@@ -1,0 +1,16 @@
+name: "PR review request"
+
+on:
+  pull_request:
+    types: [review_requested]
+jobs:
+  specific_review_requested:
+    runs-on: ubuntu-latest
+    if: >
+      ${{ contains(github.event.pull_request.requested_reviewers.*.login, 'octo-org/octo-team') }}
+    steps:
+      - run: echo 'A review from octo-team was requested'
+  always:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'A review was requested'
