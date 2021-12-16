@@ -1,11 +1,13 @@
 on:
   workflow_run:
     workflows: ["Manually triggered workflow"]
-    types: [requested]
-    branches: [test]
+    types: [requested, completed]
 
 jobs:
   on-success:
     runs-on: ubuntu-latest
     steps:
-      - run: echo 'It was a success'
+      - env:
+          EVENT_CONTEXT: ${{ toJSON(github.event) }}
+        run: |
+          echo $EVENT_CONTEXT
