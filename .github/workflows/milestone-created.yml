@@ -2,15 +2,10 @@ on:
   workflow_run:
     workflows: ["Manually triggered workflow"]
     types: [requested]
+    branches: [test]
 
 jobs:
   on-success:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - run: echo 'It was a success'
-  on-failure:
-    runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
-    steps:
-      - run: echo 'It was a failure'
