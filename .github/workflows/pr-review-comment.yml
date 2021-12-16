@@ -1,0 +1,11 @@
+name: "On PR REVIEW comment"
+
+on:
+  pull_request_review_comment:
+
+jobs:
+
+  always:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "This PR was review commented"
