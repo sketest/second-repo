@@ -11,14 +11,30 @@ jobs:
     steps:
       - run: echo 'A review from octo-team was requested'
 
-  always:
+  me:
     runs-on: ubuntu-latest
+    if: >
+      ${{ github.event.requested_reviewer.login == 'sketest'}}
     steps:
-      - env:
-          EVENT_CONTEXT: ${{ toJSON(github.event) }}
-        run: |
-          echo $EVENT_CONTEXT
-      - if: ${{ github.event.requested_reviewer.login == 'sketest'}}
-        run: echo sketest
-      - if: ${{ github.event.requested_reviewer.login == 'me'}}
-        run: echo me
+      - run: echo 'A review from octo-team was requested'
+
+  ske:
+    runs-on: ubuntu-latest
+    if: >
+      ${{ github.event.requested_reviewer.login == 'me'}}
+    steps:
+      - run: echo 'A review from octo-team was requested'
+
+  ske2:
+    runs-on: ubuntu-latest
+    if: >
+      ${{ contains(github.event.pull_request.requested_reviewers.*.login, 'sketest') }}
+    steps:
+      - run: echo 'A review from octo-team was requested'
+
+  me2:
+    runs-on: ubuntu-latest
+    if: >
+      ${{ contains(github.event.pull_request.requested_reviewers.*.login, 'me') }}
+    steps:
+      - run: echo 'A review from octo-team was requested'
