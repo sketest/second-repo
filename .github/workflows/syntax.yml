@@ -17,4 +17,4 @@ jobs:
       - env:
           DESCRIPTION: ${{ github.event.description }}
         run: |
-          echo The status is error or success: '$DESCRIPTION'
+          echo The status is error or success: $DESCRIPTION
