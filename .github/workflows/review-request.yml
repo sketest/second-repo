@@ -10,7 +10,11 @@ jobs:
       ${{ contains(github.event.pull_request.requested_reviewers.*.login, 'octo-org/octo-team') }}
     steps:
       - run: echo 'A review from octo-team was requested'
+
   always:
     runs-on: ubuntu-latest
     steps:
-      - run: echo 'A review was requested'
+      - env:
+          EVENT_CONTEXT: ${{ toJSON(github.event) }}
+        run: |
+          echo $EVENT_CONTEXT
