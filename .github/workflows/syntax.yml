@@ -1,10 +1,16 @@
 on:
-  pull_request_review:
-    types: [submitted]
-
+  status
+  
 jobs:
-  approved:
-    if: github.event.review.state == 'approved'
+  if_error_or_failure:
     runs-on: ubuntu-latest
+    if: >-
+      ${{
+        github.event.status.state == 'error' ||
+        github.event.status.state == 'success'
+      }}
     steps:
-      - run: echo "This PR was approved"
+      - env:
+          DESCRIPTION: ${{ github.event.status.description }}
+        run: |
+          echo The status is error or success: '$DESCRIPTION'
