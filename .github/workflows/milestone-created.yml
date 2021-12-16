@@ -1,7 +1,6 @@
 on:
   workflow_run:
     workflows: ["Manually triggered workflow"]
-    types: [requested, completed]
 
 jobs:
   on-success:
