@@ -4,17 +4,17 @@ on:
 jobs:
   if_error_or_failure:
     runs-on: ubuntu-latest
-#     if: >-
-#       ${{
-#         github.event.state == 'error' ||
-#         github.event.state == 'success'
-#       }}
+    if: >-
+      ${{
+        github.event.state == 'error' ||
+        github.event.state == 'success'
+      }}
     steps:
       - env:
           EVENT_CONTEXT: ${{ toJSON(github.event) }}
         run: |
           echo $EVENT_CONTEXT
       - env:
-          DESCRIPTION: ${{ github.event.status.description }}
+          DESCRIPTION: ${{ github.event.description }}
         run: |
           echo The status is error or success: '$DESCRIPTION'
