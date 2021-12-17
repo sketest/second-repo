@@ -1,11 +1,23 @@
-name: PR comment
-
-on: issue_comment
+name: Manually triggered workflow
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Person to greet'
+        required: true
+        default: 'Mona the Octocat'
+      home:
+        description: 'location'
+        required: false
+        default: 'The Octoverse'
 
 jobs:
-  pr_commented:
-    name: PR comment
+  say_hello:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "Comment on PR #${{ github.event.issue.number }}"
+          echo Hello $NAME!
+          echo -in $HOME
+        env:
+          NAME: ${{ github.event.inputs.name }}
+          HOME: ${{ github.event.inputs.home }}
