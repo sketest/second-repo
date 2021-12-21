@@ -1,8 +1,6 @@
-name: PR review
+name: PR comment
 on:
-  pull_request_review:
-    types: [edited, dismissed]
-
+  issue_comment:
 
 jobs:
   print:
