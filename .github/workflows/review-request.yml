@@ -4,7 +4,7 @@ on:
   workflow_run:
     workflows: ["TRIG"]
     types: [requested]
-    branches-ignore: [test]
+    branches-ignore: [test3]
 
 
 jobs:
