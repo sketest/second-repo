@@ -1,0 +1,10 @@
+name: "On PR TARGET"
+
+on:
+  pull_request_target:
+
+jobs:
+  approved:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "hi"
