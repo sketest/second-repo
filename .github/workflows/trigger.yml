@@ -1,0 +1,10 @@
+name: "TRIG"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  specific_review_requested:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'A review from octo-team was requested'
