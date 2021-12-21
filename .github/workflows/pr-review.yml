@@ -1,12 +1,11 @@
-name: "On PR REVIEW submit"
-
+name: PR review
 on:
   pull_request_review:
-    types: [submitted]
+    types: [edited, dismissed]
+
 
 jobs:
-  approved:
-    if: github.event.review.state == 'approved'
+  print:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "This PR was approved"
+      - run: echo hi
