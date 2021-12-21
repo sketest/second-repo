@@ -1,0 +1,11 @@
+name: PR
+
+on: pull_request
+
+jobs:
+  pr_commented:
+    name: PR comment
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo A comment
