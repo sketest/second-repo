@@ -3,7 +3,7 @@ name: "On PR TARGET"
 on:
   pull_request_target:
     branches:    
-      - 'test4'
+      - 'test5'
 
 jobs:
   approved:
