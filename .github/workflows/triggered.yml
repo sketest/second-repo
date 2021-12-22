@@ -23,7 +23,7 @@ jobs:
             });
             console.log(allArtifacts)
             let matchArtifact = allArtifacts.data.artifacts.filter((artifact) => {
-              return artifact.name == "pr"
+              return artifact.name == "pr_number"
             })[0];
             console.log(matchArtifact)
             console.log(matchArtifact.id)
@@ -34,10 +34,10 @@ jobs:
                archive_format: 'zip',
             });
             var fs = require('fs');
-            fs.writeFileSync('${{github.workspace}}/pr.zip', Buffer.from(download.data));
+            fs.writeFileSync('${{github.workspace}}/pr_number.zip', Buffer.from(download.data));
 
       - name: 'Unzip artifact'
-        run: unzip pr.zip
+        run: unzip pr_number.zip
 
       - name: 'Comment on PR'
         uses: actions/github-script@v3
