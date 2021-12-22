@@ -17,8 +17,6 @@ jobs:
             console.log(context)
       - name: 'Download artifact'
         uses: actions/github-script@v5
-        env:
-          RUN_ID: ${{ github.event. }}
         with:
           script: |
             let allArtifacts = await github.rest.actions.listWorkflowRunArtifacts({
