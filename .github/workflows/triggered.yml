@@ -18,13 +18,13 @@ jobs:
       - name: 'Download artifact'
         uses: actions/github-script@v5
         env:
-          RUN_ID: ${{ github.event.workflow_run.id }}
+          RUN_ID: ${{ github.event. }}
         with:
           script: |
             let allArtifacts = await github.rest.actions.listWorkflowRunArtifacts({
                owner: context.repo.owner,
                repo: context.repo.repo,
-               run_id: $RUN_ID,
+               run_id: context.payload.workflow_run.id,
             });
             let matchArtifact = allArtifacts.data.artifacts.filter((artifact) => {
               return artifact.name == "pr_number"
@@ -36,7 +36,7 @@ jobs:
                archive_format: 'zip',
             });
             var fs = require('fs');
-            fs.writeFileSync('${{ github.workspace }}/pr_number.zip', Buffer.from(download.data));
+            fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/pr_number.zip`, Buffer.from(download.data));
 
       - name: 'Unzip artifact'
         run: unzip pr_number.zip
