@@ -2,11 +2,11 @@ name: "On PR TARGET"
 
 on:
   pull_request_target:
-    branches:    
-      - 'test5'
-
+    types:
+      - opened
 jobs:
-  approved:
+  run_if:
+    if:  startsWith(github.head_ref, 'releases/')
     runs-on: ubuntu-latest
     steps:
-      - run: echo "hi"
+      - run: echo "The head of this PR starts with 'releases/'"
