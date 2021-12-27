@@ -1,7 +1,9 @@
 name: Release
 
 on:
- release:
+ push:
+   tags:
+     - "v1.*"
 
 jobs:
   print_context:
