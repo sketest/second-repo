@@ -2,12 +2,11 @@ name: PR
 
 on:
   pull_request:
-    tags: v1.0
+    types: [labeled]
 
 jobs:
   pr_commented:
-    name: PR comment
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo A comment
+          echo "What is on main"
