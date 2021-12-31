@@ -2,9 +2,28 @@ name: "On PR TARGET"
 
 on:
   pull_request_target:
-
+    types:
+      - labeled
 jobs:
-  approved:
+  run_if:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "hi"
+      - env:
+          EVENT_CONTEXT: ${{ toJSON(github.event) }}
+        run: |
+          echo $EVENT_CONTEXT
+      - run: echo "What is on main"
+      - name: comment
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ github.event.pull_request.html_url }}
+        run: |
+          gh pr edit $PR --add-label 'invalid'
+          gh pr comment $PR --body 'yo a'
+      - name: comment2
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          PR: ${{ github.event.pull_request.html_url }}
+        run: |
+          gh pr edit $PR --add-label 'invalid'
+          gh pr comment $PR --body 'yo a 2'
