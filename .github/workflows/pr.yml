@@ -10,3 +10,11 @@ jobs:
     steps:
       - run: |
           echo "What is on main"
+      - name: comment
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ github.event.pull_request.html_url }}
+        run: |
+          gh pr edit $PR --add-label 'invalid'
+          gh pr comment $PR --body 'yo'
+
