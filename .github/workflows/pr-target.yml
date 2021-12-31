@@ -19,5 +19,11 @@ jobs:
           PR: ${{ github.event.pull_request.html_url }}
         run: |
           gh pr edit $PR --add-label 'invalid'
-          gh pr comment $PR --body 'yo'
-
+          gh pr comment $PR --body 'yo a'
+      - name: comment2
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          PR: ${{ github.event.pull_request.html_url }}
+        run: |
+          gh pr edit $PR --add-label 'invalid'
+          gh pr comment $PR --body 'yo a 2'
